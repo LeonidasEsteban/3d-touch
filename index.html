@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>3d touch</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <style>
+    body{
+      margin:0;
+      background: #98CA3F;
+    }
+    .Platzi {
+      width: 0%;
+      height: 100vh;
+      background-color: #273B47;
+      background-image: url('platzi.png');
+      background-size: 200px auto;
+      background-position: center 100px;
+      background-repeat: no-repeat;
+    }
+  </style>
+</head>
+<body id="body">
+  <div id='platzi' class="Platzi"></div>
+  <script src="pressure.min.js"></script>
+  <script>
+    var $platzi = document.getElementById('platzi');
+    Pressure.set('#body', {
+      start: function() {
+        console.log('he iniciado');
+      },
+      end: function() {
+        console.log('he terminado');
+        $platzi.style.width = '0%';
+      },
+      change: function(force) {
+        console.log(force);
+        $platzi.style.width = Pressure.map(force, 0, 1, 0, 100)+"%";
+      },
+    });
+  </script>
+</body>
+</html>
